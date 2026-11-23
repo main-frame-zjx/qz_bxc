@@ -1,0 +1,176 @@
+:root {
+  --paper: #f6f4ed;
+  --ink: #172d2d;
+  --muted: #53645e;
+  --pine: #112e30;
+  --teal: #00665b;
+  --lime: #d7ed9d;
+  --line: #ced4c9;
+  --mono: "Cascadia Mono", Consolas, "Microsoft YaHei", monospace;
+  --serif: "STSong", "Songti SC", "Noto Serif CJK SC", SimSun, serif;
+}
+* {box-sizing: border-box}
+body {margin: 0; background: var(--paper); color: var(--ink); font: 16px/1.7 "Source Sans 3","Microsoft YaHei","PingFang SC",sans-serif; overflow-wrap: anywhere}
+a {color: inherit; text-decoration-thickness: 1px; text-underline-offset: .25em}
+button, summary {font: inherit; color: inherit; cursor: pointer}
+button {border: 0}
+button:focus-visible, a:focus-visible, summary:focus-visible {outline: 3px solid #bd7026; outline-offset: 4px}
+.cover :focus-visible, dialog :focus-visible {outline-color: #f6d678}
+p, h1, h2, h3, figure {margin: 0}
+.wrap {width: min(1160px, calc(100% - 96px)); margin-inline: auto}
+.skip {position: fixed; z-index: 10; left: 12px; top: -70px; padding: 10px; background: white}
+.skip:focus {top: 8px}
+.cover {color: #f6f5eb; background: radial-gradient(ellipse at 72% 65%,#254749 0%,transparent 54%),var(--pine)}
+.mast, .cover-foot, .foot, .stream-label, .source-head, .neighbours, .dialog-head, .start, .names, .eyebrow, .node-meta {display: flex; align-items: center}
+.mast, .cover-foot, .foot, .stream-label, .dialog-head {justify-content: space-between}
+.mast {min-height: 69px; border-bottom: 1px solid #476062}
+.mast a, .cover-foot a, .brand, .start a, .neighbours a, .foot a, .ending>a {text-decoration: none}
+.brand {display: inline-flex; align-items: center; gap: 12px; font: 700 21px var(--serif); letter-spacing: .1em}
+.brand-icon {position: relative; display: block; width: 26px; height: 25px; transform: rotate(-11deg)}
+.brand-icon i {position: absolute; width: 15px; height: 21px; border: 1.7px solid var(--lime); left: 0; top: 1px}
+.brand-icon i+i {left: 10px; top: 4px; border-color: #a2cbcf}
+.mast nav {display: flex; align-items: center; gap: 25px; font-size: 14px; color: #d7e2dd}
+.mast nav a, .cover-foot a {padding-block: 8px}
+a:hover {text-decoration: underline}
+.hero {display: grid; grid-template-columns: minmax(0,.87fr) minmax(0,1.13fr); gap: clamp(36px,6vw,86px); align-items: center; padding-block: clamp(42px,5vw,76px)}
+.eyebrow {gap: 12px; color: #d7e5d9; font-size: 13px; letter-spacing: .09em}
+.eyebrow>span {width: 25px; height: 2px; background: var(--lime)}
+.eyebrow i {color: #87a69c; font-style: normal}
+h1 {margin: 22px 0 20px; font: 700 clamp(66px,6.2vw,86px)/1.02 var(--serif); letter-spacing: -.045em}
+h1 .and {font-size: .45em; color: var(--lime); margin-left: .27em; vertical-align: .1em; font-weight: 400}
+.second-name {display: block; margin-top: 8px}
+.intro {font-size: 15px; color: #d6e0db; line-height: 1.9; max-width: 31em}
+.start {gap: 16px; margin-top: 25px; font-size: 13px; color: #c4d4cd}
+.start a {background: var(--lime); color: var(--pine); font-weight: bold; padding: 9px 17px; border-radius: 3px; font-size: 15px}
+.start a:hover {background: #e7f8c0}
+.start a span {margin-left: 14px}
+.cover-image {padding-top: 4px}
+.still .enlarge {position: relative; display: block; padding: 0; width: 100%; background: #193336; cursor: zoom-in}
+.still img, dialog img {display: block; width: 100%; height: auto}
+.still img {aspect-ratio: 1000/562}
+.zoom-mark {position: absolute; bottom: 10px; right: 10px; display: grid; width: 32px; height: 32px; place-items: center; background: #10292ae8; color: #fff; font: 24px/1 sans-serif; border: 1px solid #a2b3a9; border-radius: 50%}
+.cover-image .still {border-top: 3px solid var(--lime); padding-top: 5px}
+.names {gap: 26px; margin-block: 11px 6px; font-size: 16px; font-weight: 650}
+.names i {display: inline-block; width: 8px; height: 8px; margin-right: 7px; background: #e4c75a; border-radius: 50%}
+.names span+span i {background: #a0cce1}
+.names small {font-size: 12px; color: #c5d1ca; font-weight: normal}
+.caption,.credit {display: block; font-size: 13px; line-height: 1.65}
+.credit {font-size: 12px; margin-top: 3px}
+.cover .caption {color: #dae4dd}
+.cover .credit,.cover-foot {color: #c1d1c9}
+.cover-foot {border-top: 1px solid #496362; min-height: 44px; font-size: 12px}
+.cover-foot time {margin-left: 6px; font: 13px var(--mono); color: #e2e9df}
+.layout {display: grid; grid-template-columns: 200px minmax(0,1fr); gap: clamp(36px,6.5vw,98px); padding-block: 44px 56px; align-items: start}
+.rail {position: sticky; top: 24px}
+.toc>summary {list-style: none; font-weight: 700; font-size: 16px; color: var(--pine); padding-bottom: 13px; border-bottom: 2px solid var(--pine)}
+summary::-webkit-details-marker {display:none}
+.toc>summary::after {content: "−"; float: right; color: var(--teal)}
+.toc:not([open])>summary::after {content: "+"}
+.mobile-stage {display: none}
+.toc nav {padding-block: 9px; border-bottom: 1px solid var(--line)}
+.toc a {display: flex; align-items: center; gap: 11px; padding: 10px 6px; text-decoration: none; font-size: 15px}
+.toc a:hover, .toc a[aria-current] {color: var(--teal); background: #e7ecdf}
+.toc a[aria-current] {font-weight: bold}
+.toc a small {margin-left: auto; font: 12px var(--mono); color: var(--muted)}
+.nav-dot, .key-dot, .key-square {display: inline-block; width: 8px; height: 8px; border: 1px solid #64786c; border-radius: 50%}
+.toc a[aria-current] .nav-dot, .key-dot {background: var(--teal); border-color: var(--teal)}
+.rail-meta {margin-top: 15px; display: flex; align-items: center; gap: 6px; color: var(--muted); font-size: 12px}
+.key-square {border-radius: 1px; margin-left: 8px}
+.stream-label {padding-bottom: 12px; border-bottom: 1px solid var(--line); font-size: 13px; color: var(--muted)}
+.stream-label>span:first-child {color: var(--teal); font-weight: bold; letter-spacing: .1em}
+.chapter header {display: flex; align-items: baseline; gap: 15px; margin-block: 24px 20px}
+.chapter-num {color: var(--teal); font: italic 26px/1 Georgia,serif}
+.chapter h2, .ending h2, .reading-notes h2 {font: 700 32px/1.35 var(--serif); letter-spacing: .035em}
+.node {position: relative; background: #fffef9; margin: 0 0 16px; padding: clamp(19px,2.4vw,34px); border: 1px solid var(--line); border-left: 4px solid #4a7d6a; scroll-margin: 20px}
+.node.context {background: #efefe6; border-left: 4px solid #aeb9a6}
+.node.active {border-left-color: var(--teal); box-shadow: inset 0 0 0 1px #7f9b89}
+.node:focus {outline: none}
+.node:focus-visible {outline: 2px solid var(--teal); outline-offset: 2px}
+.node-meta {gap: 10px; margin-bottom: 10px; font-size: 12px}
+.kind {display:inline-flex; align-items:center; gap:6px; font-weight: bold; color: var(--teal)}
+.kind:before {content:""; width:7px; height:7px; background:currentColor; border-radius:50%}
+.context .kind {color:#576659}
+.context .kind:before {background:transparent; border:1px solid currentColor; border-radius:1px}
+.code,.total {font: 12px var(--mono); color: var(--muted)}
+.node h3 {font: 700 clamp(22px,2.3vw,31px)/1.4 var(--serif)}
+.event-time,.source-line {display:flex; flex-wrap:wrap; align-items:baseline; gap:3px 10px; font-size:13px; color:var(--muted)}
+.event-time {margin-top: 7px}
+.event-time>span,.source-line>span {font-size:12px}
+.story-text,.ending p,.reading-notes>p {margin:15px 0; line-height:1.85}
+.node .still {margin: 20px 0}
+.node .caption {margin-top:8px}
+.node .credit {color:var(--muted)}
+.sources summary {display:flex; gap:8px; align-items:center; list-style:none; font-size:14px; font-weight:650; color:var(--teal); padding-block:9px}
+.sources summary:before {content:"+"; display:inline-grid; place-items:center; width:18px; height:18px; border:1px solid #9aafa1; border-radius:50%; font:15px/1 var(--mono)}
+.sources[open]>summary:before {content:"−"}
+.records {border-top:1px solid var(--line); padding-block:8px; font-size:14px}
+.records a,.ending>a {color:var(--teal)}
+.source {padding:9px 0}
+.source+.source {border-top:1px dotted #b6c1b4}
+.source-head {align-items:baseline; gap:8px}
+.source p,.source small {margin:4px 0; color:var(--muted)}
+.source small {font-size:12px}
+.clips {padding-left:20px; margin:4px 0 8px}
+.clips b {font-family:var(--mono); color:var(--teal)}
+.neighbours {border-top:1px solid var(--line); margin-top:6px; justify-content:space-between; min-height:35px}
+.neighbours a {color:var(--teal); font-size:13px; padding:8px 2px 0}
+.neighbours a.next {margin-left:auto}
+.ending,.reading-notes {margin-top:28px; padding:24px; scroll-margin:20px}
+.ending {background:#e2eadb; border-top:3px solid #537e69}
+.ending h2,.reading-notes h2 {font-size:24px}
+.ending>a {font-weight:bold}
+.reading-notes {border:1px solid var(--line); font-size:14px}
+.foot {padding-block:22px; font-size:13px; color:var(--muted); border-top:1px solid var(--line)}
+dialog {background:#112e30; color:#f6f5eb; padding:14px; width:min(1000px,95vw); max-width:95vw; max-height:92dvh; border:1px solid #6c8983; border-radius:4px; overflow:auto}
+dialog::backdrop {background:#071918d9}
+.dialog-head {gap:15px; margin-bottom:10px}
+.dialog-head h2 {font:700 18px var(--serif)}
+.close {padding:6px 12px; border-radius:2px; color:var(--pine); background:var(--lime)}
+.close span {font-size:18px; margin-left:5px}
+.scale {background:transparent; color:#e5eae1; padding:6px 10px; font-size:14px; text-decoration:underline; text-underline-offset:.22em}
+.pan {overflow:auto; max-height:65dvh; overscroll-behavior:contain}
+dialog img {max-height:65dvh; object-fit:contain; background:#0a1d1e}
+.pan.full-size img {width:auto; max-width:none; max-height:none}
+dialog .caption {margin-top:10px}
+dialog .credit {color:#c8d7ce}
+@keyframes arrive {from {background-color:#dfebc8} to {}}
+@media (prefers-reduced-motion:no-preference) {.node.arrived {animation:arrive .65s ease-out}}
+@media(max-width:850px) {
+  .wrap {width:calc(100% - 48px)}
+  .hero {gap:26px}
+  h1 {font-size:64px}
+  .layout {grid-template-columns:155px minmax(0,1fr);gap:24px}
+}
+@media(max-width:680px) {
+  .wrap {width:calc(100% - 34px)}
+  .mast {min-height:52px}
+  .brand {font-size:18px;gap:9px}
+  .mast nav {gap:15px;font-size:13px}
+  .hero {grid-template-columns:1fr;gap:20px;padding-block:25px 18px}
+  .eyebrow {font-size:12px;gap:8px}
+  h1 {font-size:clamp(43px,10vw,63px);line-height:1.2;margin:13px 0 10px;letter-spacing:-.055em}
+  .second-name {display:inline;margin:0}
+  h1 .and {margin-inline:.25em}
+  .intro {font-size:14px;line-height:1.75;max-width:none}
+  .start {margin-top:16px}
+  .start a {padding:7px 14px}
+  .names {margin-block:7px 4px}
+  .cover-foot {min-height:38px}
+  .layout {display:block;padding-block:0 24px}
+  .rail {top:0;z-index:2;background:var(--paper); padding-top:5px}
+  .toc>summary {display:flex;align-items:center;gap:9px;min-height:43px;padding:5px 3px;cursor:pointer}
+  .toc>summary::after {margin-left:auto}
+  .mobile-stage {display:inline;color:var(--teal);font-size:12px;font-weight:normal}
+  .toc nav {max-height:45dvh;overflow:auto}
+  .rail-meta {display:none}
+  .stream-label {padding-block:18px 8px}
+  .chapter header {margin:17px 0 13px}
+  .chapter h2 {font-size:26px}
+  .chapter-num {font-size:21px}
+  .node,.reading-notes {scroll-margin-top:62px}
+  .node {padding:17px;margin-bottom:12px}
+  .story-text {font-size:15px}
+  .ending,.reading-notes {padding:17px}
+  .foot {gap:10px;font-size:12px}
+  dialog {width:100%; max-width:100%; padding:8px}
+}
