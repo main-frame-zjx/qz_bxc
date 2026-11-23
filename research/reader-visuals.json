@@ -1,0 +1,163 @@
+{
+  "images": [
+    {
+      "nodeId": "N00",
+      "imageId": "D-N00",
+      "file": "images/D-N00.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大"
+      ],
+      "alt": "白小纯回忆从前天天聊天，青稚翻看旧照片。"
+    },
+    {
+      "nodeId": "N01",
+      "imageId": "D-N01",
+      "file": "images/D-N01.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大",
+        "轮播"
+      ],
+      "alt": "苏州天霸以 172 分夺冠，青稚和白小纯同在队中。"
+    },
+    {
+      "nodeId": "N02",
+      "imageId": "D-N02",
+      "file": "images/D-N02.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大",
+        "轮播"
+      ],
+      "alt": "两栏分别呈现青稚对训练时间、白小纯对工资与道歉的回忆。"
+    },
+    {
+      "nodeId": "N03",
+      "imageId": "D-N03",
+      "file": "images/D-N03.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大",
+        "轮播"
+      ],
+      "alt": "队籍箭头从苏州天霸指向深圳 WBG，转会的是白小纯。"
+    },
+    {
+      "nodeId": "N04",
+      "imageId": "D-N04",
+      "file": "images/D-N04.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大"
+      ],
+      "alt": "白小纯拿着心结卡，青稚提议由自己来念。"
+    },
+    {
+      "nodeId": "N05",
+      "imageId": "D-N05",
+      "file": "images/D-N05.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大",
+        "轮播"
+      ],
+      "alt": "青稚向白小纯道歉，两人随后拥抱。"
+    },
+    {
+      "nodeId": "N06",
+      "imageId": "D-N06",
+      "file": "images/D-N06.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大"
+      ],
+      "alt": "白小纯谈及当时不想和好，青稚回忆自己一度想放弃沟通。"
+    },
+    {
+      "nodeId": "N07",
+      "imageId": "D-N07",
+      "file": "images/D-N07.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大"
+      ],
+      "alt": "白小纯开口邀请已经搬出去的青稚回双人间。"
+    },
+    {
+      "nodeId": "N08",
+      "imageId": "D-N08",
+      "file": "images/D-N08.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大",
+        "轮播"
+      ],
+      "alt": "青稚想再做朋友，白小纯想看今后的相处。"
+    },
+    {
+      "nodeId": "N09",
+      "imageId": "D-N09",
+      "file": "images/D-N09.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大"
+      ],
+      "alt": "两人商量豆皮的分量，白小纯先估，青稚请他再拿一点。"
+    },
+    {
+      "nodeId": "N10",
+      "imageId": "D-N10",
+      "file": "images/D-N10.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大"
+      ],
+      "alt": "在徒步的假设问答里，青稚说先扶白小纯，白小纯笑了。"
+    },
+    {
+      "nodeId": "B01",
+      "imageId": "D-B01",
+      "file": "images/D-B01.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大"
+      ],
+      "alt": "两个分开的直播间里，青稚和白小纯各自回应观众。"
+    },
+    {
+      "nodeId": "B02",
+      "imageId": "D-B02",
+      "file": "images/D-B02.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大"
+      ],
+      "alt": "两人先同台活动，次日在挑战赛分别代表苏州天霸和江西童家堡。"
+    },
+    {
+      "nodeId": "B03",
+      "imageId": "D-B03",
+      "file": "images/D-B03.svg",
+      "type": "原创示意",
+      "positions": [
+        "正文",
+        "放大"
+      ],
+      "alt": "青稚一人回顾旅行，提到更了解白小纯，也感到修复需要时间。"
+    }
+  ]
+}
