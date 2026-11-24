@@ -129,15 +129,20 @@
       document.documentElement.style.overflow = "hidden";
     });
   });
-  dialog.querySelector(".close").addEventListener("click", () => dialog.close());
+  function closeLightbox() {
+    document.documentElement.style.overflow = "";
+    dialog.close();
+    opener.focus({preventScroll:true});
+    window.scrollTo({top:readingY, behavior:"instant"});
+  }
+  dialog.querySelector(".close").addEventListener("click", closeLightbox);
+  dialog.addEventListener("cancel", event => {
+    event.preventDefault();
+    closeLightbox();
+  });
   dialog.addEventListener("click", event => {
     if (event.target !== dialog) return;
     const r = dialog.getBoundingClientRect();
-    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) dialog.close();
-  });
-  dialog.addEventListener("close", () => {
-    document.documentElement.style.overflow = "";
-    opener?.focus({preventScroll:true});
-    window.scrollTo({top:readingY, behavior:"instant"});
+    if (event.clientX < r.left || event.clientX > r.right || event.clientY < r.top || event.clientY > r.bottom) closeLightbox();
   });
 })();
