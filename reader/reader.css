@@ -50,6 +50,11 @@ h1 .and {font-size: .45em; color: var(--lime); margin-left: .27em; vertical-alig
 .hero:not(:has(.reel)) h1 .second-name {display:inline}
 .hero:not(:has(.reel)) .intro {max-width:50em}
 .hero-copy>.still {max-width:360px; margin:14px 0 5px}
+@media (min-width:851px) {
+  .hero:has(.portrait-source) {padding-block:clamp(28px,3vw,48px)}
+  .hero:has(.portrait-source) h1 {font-size:clamp(51px,4.8vw,70px)}
+  .hero:has(.portrait-source) .second-name {display:inline}
+}
 .hero-copy>.still figcaption {color:#e3e9df; line-height:1.6}
 .portrait-source {font-size:13px; color:#d6e0db}
 .portrait-source summary {display:inline-block; color:var(--lime); padding:4px 0}
