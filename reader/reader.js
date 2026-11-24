@@ -7,6 +7,49 @@
   const dialog = document.querySelector("dialog");
   const pan = dialog.querySelector(".pan");
   const scaleButton = dialog.querySelector(".scale");
+  const reel = document.querySelector(".reel");
+  let stopReel = () => {};
+  if (reel) {
+    const slides = [...reel.querySelectorAll(".slide")];
+    const toggle = reel.querySelector(".play");
+    const counter = reel.querySelector(".counter");
+    let index = 0;
+    let timer = null;
+
+    function turn(step) {
+      slides[index].hidden = true;
+      index = (index + step + slides.length) % slides.length;
+      slides[index].hidden = false;
+      counter.textContent = (index + 1) + " / " + slides.length;
+    }
+    stopReel = () => {
+      if (timer === null) return;
+      clearInterval(timer);
+      timer = null;
+      toggle.textContent = "继续播放";
+      toggle.setAttribute("aria-pressed", "false");
+      counter.setAttribute("aria-live", "polite");
+    };
+    toggle.addEventListener("click", () => {
+      if (timer !== null) return stopReel();
+      if (document.hidden) return;
+      toggle.textContent = "暂停";
+      toggle.setAttribute("aria-pressed", "true");
+      counter.setAttribute("aria-live", "off");
+      timer = setInterval(() => turn(1), 6000);
+    });
+    for (const [selector, step] of [[".prev-frame", -1], [".next-frame", 1]]) {
+      reel.querySelector(selector).addEventListener("click", () => {
+        stopReel();
+        turn(step);
+      });
+    }
+    document.addEventListener("visibilitychange", () => { if (document.hidden) stopReel(); });
+    window.addEventListener("pagehide", stopReel);
+    document.querySelector("main").addEventListener("focusin", stopReel);
+    reel.querySelector(".slides").addEventListener("focusin", stopReel);
+    new IntersectionObserver(([entry]) => { if (!entry.isIntersecting) stopReel(); }).observe(reel);
+  }
   let current, opener, readingY, scheduled = false;
 
   function mark(node) {
@@ -47,6 +90,7 @@
     const link = event.target.closest('a[href^="#"]');
     if (!link || event.defaultPrevented || event.ctrlKey || event.metaKey || event.shiftKey || event.altKey) return;
     const node = document.getElementById(link.hash.slice(1));
+    if (node && !node.closest(".reel")) stopReel();
     if (!node?.classList.contains("node")) return;
     event.preventDefault();
     if (compact.matches) toc.open = false;
@@ -78,8 +122,8 @@
       const enlarged = dialog.querySelector("img");
       enlarged.src = original.src;
       enlarged.alt = original.alt;
-      const caption = dialog.querySelector("figcaption");
-      caption.replaceChildren(...[...figure.querySelectorAll(".caption,.credit")].map(el => el.cloneNode(true)));
+      dialog.querySelector("h2").textContent = figure.dataset.title;
+      dialog.querySelector("figcaption").textContent = figure.querySelector("figcaption")?.textContent || "";
       setScale(false);
       dialog.showModal();
       document.documentElement.style.overflow = "hidden";
