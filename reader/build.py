@@ -45,7 +45,7 @@ def sources_panel(label, ids, sources, anchors=()):
     return f'<details class="sources"><summary>{label}<span class="total">{len(ids)}</span></summary><div class="records">{records}</div></details>'
 
 
-def picture(visual, position, title, asset_root):
+def picture(visual, position, title, asset_root, caption=""):
     if position not in visual["positions"]:
         raise ValueError(f'{visual["imageId"]} cannot be used for {position}')
     file = asset_root / visual["file"]
@@ -58,7 +58,8 @@ def picture(visual, position, title, asset_root):
         img = f'''<button type="button" class="enlarge" aria-haspopup="dialog" aria-label="放大图片，{escape(title)}">{img}
         <span class="zoom-mark" aria-hidden="true">⤢</span></button>'''
     kind = escape(visual["type"])
-    label = '<figcaption>原创示意</figcaption>' if kind == "原创示意" else ""
+    caption = "原创示意" if kind == "原创示意" else caption
+    label = f'<figcaption>{escape(caption)}</figcaption>' if caption else ""
     return f'<figure class="still" data-image="{escape(visual["imageId"])}" data-title="{escape(title)}" data-kind="{kind}">{img}{label}</figure>'
 
 
@@ -129,15 +130,25 @@ def build(data, copy, visuals, edition, out, asset_root):
         ending = f'''<section class="ending"><h2>{escape(copy["ending"]["title"])}</h2>{"".join(ending_parts)}
         <p>11 月 20 日抢鲜版的完整对白仍待核实。</p>{sources_panel("抢鲜版节目页", ["S15"], sources)}</section>'''
 
-    portraits = "".join(picture(v, "封面", v["alt"], asset_root) for v in visuals if "封面" in v["positions"])
     header = copy["header"]
+    portraits = []
+    for visual in (v for v in visuals if "封面" in v["positions"]):
+        quote = header.get("portraitQuotes", {}).get(visual["imageId"])
+        if visual["type"] == "节目单帧" and not quote:
+            raise ValueError(f'Missing commentary for {visual["imageId"]}')
+        portraits.append(picture(visual, "封面", visual["alt"], asset_root, quote["caption"] if quote else ""))
+        if quote:
+            source = sources[quote["sourceId"]]
+            reference = external(source["url"], quote["linkLabel"])
+            portraits.append(f'<details class="portrait-source"><summary>人物资料出处</summary>'
+                             f'<p>{escape(source["publisher"])} · {reference}</p></details>')
     # Common copy and pictures are rendered into static HTML. The internal image ledger is never an input.
     variables = dict(
         edition="试读版" if sample else "完整版", css=(HERE/"reader.css").read_text(encoding="utf8"),
         js=(HERE/"reader.js").read_text(encoding="utf8"), intro=escape(data["intro"]),
         years=re.sub(r"\d{4} 年 \d{1,2} 月 \d{1,2} 日", r"<time>\g<0></time>", escape(header["timeLabel"])),
-        time_note=escape(header["text"]), portrait=portraits, reel=reel,
-        asof=escape(copy["asOf"]), intro_sources=sources_panel("人物资料出处", list(dict.fromkeys(data["introSources"] + header["sourceIds"])), sources),
+        time_note=escape(header["text"]), portrait="".join(portraits), reel=reel,
+        asof=escape(copy["asOf"]), intro_sources=sources_panel("人物与队籍依据", list(dict.fromkeys(data["introSources"] + header["sourceIds"])), sources),
         first=nodes[0]["id"], nav="".join(nav), chapters="".join(chapters), ending=ending,
         count=len(nodes), stages=len(chapters), ordering=escape(data["ordering"]),
     )

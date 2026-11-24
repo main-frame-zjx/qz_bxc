@@ -12,7 +12,14 @@
     "sourceIds": [
       "S05",
       "S14"
-    ]
+    ],
+    "portraitQuotes": {
+      "F01": {
+        "caption": "右边的白小纯拿着心结卡，左边的青稚提议由自己来念。",
+        "sourceId": "S04",
+        "linkLabel": "第 4 期（上）原片"
+      }
+    }
   },
   "chapters": [
     {
